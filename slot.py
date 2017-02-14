@@ -1,17 +1,19 @@
+from classroom import *
+
 class Slot:
-	def _init_(self, student=[], classroom=[], teacher=[], tas=[], subjects=[], time_slot=[]):
+    def _init_(self, students = [], classrooms = [], teachers = [], tas = [], subjects = [], time_slot = ('', 0, 0)):
+        self.students = student
+        self.classrooms = classroom
+        self.teachers = teacher
+        self.tas = tas
+        self.subjects = subjects
+        self.time_slot = time_slot
+        self.manage()
 
-		self.student = student
-		self.classroom = classroom
-		self.teacher = teacher
-		self.tas = tas
-		self.subjects = subjects
-		self.time_slot = time_slot
+    def manage(self):
+        pass
 
-	def manage():
-		pass
-
-	def print():
-		pass
+    def print(self):
+        pass
 	
 		
