@@ -1,13 +1,15 @@
 class Classroom:
 
-    def __init__(self, name = '', teacher = None, tas = [], no_row = 0, no_column = 0):
+    def __init__(self, name = '', row = 0, n_column = 0):
         self.name = name
-        self.teacher = teacher
-        self.tas = tas
-        self.map_student = [[None for j in range(no_row)] for i in range(no_column)]
+        self.teacher = None
+        self.tas = []
+        self.map_student = [[None for j in range(n_column)] for i in range(n_row)]
+        self.n_row = n_row
+        self.n_column = n_column
 
     def load(path):
         pass
     
-    def print(self, subjects_name, exam_name, time_slot):
+    def print(self, exam_name, time_slot):
         pass
