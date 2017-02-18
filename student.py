@@ -1,6 +1,6 @@
 import xlrd
-class Student:
 
+class Student:
     def __init__(self, firstname = '', lastname = '', roll_no = '', subjects = []):
         self.firstname = firstname
         self.lastname = lastname
@@ -12,13 +12,8 @@ class Student:
         sheet = book.sheet_by_index(0)
         stu_list=[]
 
-        for i in range(1,sheet.nrows):
-            row= sheet.row_values(i)
+        for i in range(1, sheet.nrows):
+            row = sheet.row_values(i)
             stu_list.append(Student(row[0],row[1],row[2],row[3]))
            
         return stu_list
-
-if __name__=='__main__':
-    l = Student.load('student_list.xlsx')
-    print(l)
-    print(l[0].firstname)
