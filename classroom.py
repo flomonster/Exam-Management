@@ -1,6 +1,6 @@
 class Classroom:
 
-    def __init__(self, name = '', row = 0, n_column = 0):
+    def __init__(self, name = '', n_row = 0, n_column = 0):
         self.name = name
         self.teacher = None
         self.tas = []
