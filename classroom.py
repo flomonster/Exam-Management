@@ -23,5 +23,4 @@ class Classroom:
     def print(self, exam_name, time_slot):
         pass
         
-if __name__=='__main__':
-    print(Classroom.load("classroom.xlsx"))
+
