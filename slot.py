@@ -61,5 +61,7 @@ class Slot:
                     tas.remove(t)
 
 
-    def print(self):
-        pass
+    def print(self, examName):
+        for c in self.classrooms:
+            if not empty(c):
+                c.printPdf(examName, self.time_slot)
