@@ -7,11 +7,16 @@ class TA:
         self.roll_no = roll_no 
         self.subjects = subjects 
     
-    def load (path):
+    def load (path, list_subject):
         book = xlrd.open_workbook (path)
         sheet = book.sheet_by_index (0) 
         ta_list =[]
         for i in range (1, sheet.nrows):
             row = sheet.row_values (i)
-            ta_list.append(TA(row[0], row[1], row[2], row[3]))
+            code_list = row[3].split()
+            sub_list = []
+            for s in list_subject:
+                if s.code in code_list:
+                    sub_list.append(s)
+            ta_list.append(TA(row[0], row[1], row[2], sub_list))
         return ta_list 

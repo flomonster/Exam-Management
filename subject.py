@@ -20,5 +20,5 @@ class Subject:
     def nbStudent(self, students):
         n = 0
         for s in students:
-            n += self in s.subjects:
+            n += self in s.subjects
         return n
