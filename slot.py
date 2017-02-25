@@ -1,6 +1,6 @@
 from classroom import *
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4, inch, landscape
+from reportlab.lib.pagesizes import A4, inch, portrait
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
@@ -38,13 +38,13 @@ class Slot:
             sub = 0
             while column < cr.n_column and not Slot.empty(student_subject):
                 while not student_subject[sub]:
-                    sub = (sub + 1) % len(sub)
+                    sub = (sub + 1) % len(self.subjects)
                 for i in range(min(len(student_subject[sub]), cr.n_row)):
-                    cr.map_student[column][i] = student_subject[sub].pop()
+                    cr.map_student[i][column] = student_subject[sub].pop()
                 if not self.subjects[sub] in sub_in_cr:
                     sub_in_cr.append(self.subjects[sub])
                 column += 1
-                sub = (sub + 1) % len(sub)
+                sub = (sub + 1) % len(self.subjects)
             if sub_in_cr:
                 for i, t in enumerate(teachers):
                     for s in t.subjects:
@@ -73,28 +73,30 @@ class Slot:
         # Teacher table
         filename = examName + '_' + self.time_slot[0] + '-' + str(self.time_slot[1]) + '_teacher' + '.pdf'
         doc = SimpleDocTemplate(filename, pagesize=A4, rightMargin=30,leftMargin=30, topMargin=30,bottomMargin=18)
-        doc.pagesize = landscape(A4)
+        doc.pagesize = portrait(A4)
 
         data = [[examName, ''], ['','']]
         data[1][0] = self.time_slot[0] + ' ' + str(self.time_slot[1] // 100) + ':' +\
                 str(self.time_slot[1] % 100) + ' to ' + str(self.time_slot[2] // 100) +\
                 ':' + str(self.time_slot[2] % 100)
         
-        style = TableStyle([('SPAN', (0, 0), (-1, 0)),
-                            ('SPAN', (0, 1), (-1, 1)),
-                            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-                            ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-                            ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
-                            ('BOX', (0,0), (-1,-1), 0.25, colors.black),
-                            ])
+        style = [('SPAN', (0, 0), (-1, 0)),
+                 ('SPAN', (0, 1), (-1, 1)),
+                 ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                 ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                 ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
+                 ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+                ]
 
         for c in self.classrooms:
             if not c.empty() and c.teacher:
-                data.append([c.teacher.lastname + ' ' + c.teacher.firstname, ''])
+                data.append(["Classroom : " + c.name, ""])
                 style.append(('SPAN', (0, len(data)-1), (-1, len(data)-1)))
+                data.append(["TEACHER", c.teacher.lastname + ' ' + c.teacher.firstname])
                 for t in c.tas:
                     data.append(['TA', t.lastname + ' ' + t.firstname + '\n(' + t.roll_no + ')'])
-                style.append(('SPAN', (0, len(data) - len(c.tas)), (0, len(data) - 1)))
+                if len(c.tas) > 1:
+                    style.append(('SPAN', (0, len(data) - len(c.tas)), (0, len(data) - 1)))
         table = Table(data)
-        table.setStyle(style)
+        table.setStyle(TableStyle(style))
         doc.multiBuild([table])

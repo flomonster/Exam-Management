@@ -111,6 +111,7 @@ class Exam:
 if __name__ == '__main__':
     sub = Subject.load('subject_list.xlsx')
     ts = [('Monday 19 Feb', 1000, 1100), ('Tuesday 20 Feb', 1330, 1430), ('Monday 19 Feb', 1400, 1500), ('Tuesday 20 Feb', 930, 1030)]
+    ts += [('Wednesday 21 Feb', 1000, 1100), ('Wednesday 21 Feb', 1330, 1430), ('Thusday 22 Feb', 1400, 1500), ('Thursday 22 Feb', 930, 1030)]
     exam = Exam('Final Exam 2016-2017', sub[:len(sub)//2], ts)
     exam.schedule()
     exam.printClassroomPdf()
