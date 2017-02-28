@@ -25,7 +25,7 @@ class Slot:
     def manage(self):
         student_subject = [[] for i in range(len(self.subjects))] 
         teachers = self.teachers[:]
-        teachers = self.tas[:]
+        #teachers = self.tas[:]
         tas = self.tas[:]
         for i, sub in enumerate(self.subjects):
             for s in self.students:

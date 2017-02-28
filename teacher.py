@@ -1,10 +1,10 @@
 import xlrd
 class Teacher:
 
-    def __init__(self, firstname = '', lastname = '', subects = []):
+    def __init__(self, firstname = '', lastname = '', subjects = []):
         self.firstname = firstname
         self.lastname = lastname
-        self.subects = subects
+        self.subjects = subjects
 
     def load(path, list_subject):
         book = xlrd.open_workbook(path)
