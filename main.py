@@ -2,7 +2,7 @@ from tkinter import *
 from subject import *
 from exam import *
 
-class ExamManager(Frame):
+class ExamUI(Frame):
 
     def __init__(self, master = None):
         super().__init__(master)
@@ -69,7 +69,7 @@ class ExamManager(Frame):
                 hh = (start // 100) + (start % 100 + dure) // 60
                 mm = (start % 100 + dure) % 60
                 end = hh * 100 + mm
-                ts.append((self.time_slots[i][0], start, end))
+                ts.append((self.time_slots[i][1].get(), start, end))
             except:
                 for j in range(1, 4, 2):
                     self.time_slots[i][j].configure(bg='red')
@@ -109,5 +109,5 @@ class ExamManager(Frame):
 if __name__ == '__main__':
     root = Tk()
     root.title('Exam Manager')
-    app = ExamManager(root)
+    app = ExamUI(root)
     app.mainloop()
