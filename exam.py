@@ -92,14 +92,17 @@ class Exam:
                      ('BOX', (0,0), (-1,-1), 0.25, colors.black)]
             for i, slot in enumerate(day):
                 for sub in slot.subjects:
-                    day = slot.time_slot[0]
-                    time = str((slot.time_slot[1] // 100) % 12) + ':' + str(slot.time_slot[1] % 100)
-                    time += 'PM' if (slot.time_slot[1] // 100) % 12 else 'AM'
-                    data.append([day, time, sub.code, sub.name, sub.nbStudent(self.students)])
+                    d = slot.time_slot[0]
+                    time = '12:'
+                    if not slot.time_slot[1] // 100 in [0, 12]:
+                        time = str((slot.time_slot[1] // 100) % 12) + ':' 
+                    time += str(slot.time_slot[1] % 100)
+                    time += 'PM' if (slot.time_slot[1] // 100) > 11 else 'AM'
+                    data.append([d, time, sub.code, sub.name, sub.nbStudent(self.students)])
                 start, end = len(data) - len(slot.subjects), len(data) - 1
                 style.append(('SPAN', (0, start), (0, end)))
                 style.append(('SPAN', (1, start), (1, end)))
-                if i + 1 != len(self.slots):
+                if i + 1 != len(day):
                     style.append(('SPAN', (0, end + 1), (-1, end + 1)))
                     data.append([''] * 5)
             table = Table(data)
