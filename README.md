@@ -16,8 +16,8 @@ pip install xlrd reportlab
 Ubuntu & Debian :
 
 ```
-apt-get install python python-pip
-pip install xlrd reportlab
+apt-get install python3 python3-pip
+pip3 install xlrd reportlab
 ```
 
 ## Installation and Execution
