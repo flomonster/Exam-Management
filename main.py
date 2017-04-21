@@ -23,8 +23,8 @@ class ExamUI(Frame):
         Label(self, text="Duration of slots (min) : ").grid(row=0, column=2)
         self.duration = Entry(self)
         self.duration.grid(row=0, column=3)
-        Label(self, text='Date').grid(row=1, column=1)
-        Label(self, text='Time').grid(row=1, column=3)
+        Label(self, text='Date (Ex: 1 May)').grid(row=1, column=1)
+        Label(self, text='Time (Ex: 1230)').grid(row=1, column=3)
         self.time_slots = [(Entry(self), Entry(self))]
         for i in range(len(self.time_slots[0])):
             self.time_slots[0][i].grid(row=2, column=i * 2 + 1)
