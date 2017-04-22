@@ -65,6 +65,9 @@ class ExamUI(Frame):
                 if not self.time_slots[i][0]:
                     raise Exception('No day')
                 start = int(self.time_slots[i][1].get())
+                for j in range(len(ts)):
+                    if (self.time_slots[i][0].get() == ts[j][0] and start == ts[j][1]):
+                        raise Exception('Twice date')
                 hh = (start // 100) + (start % 100 + dure) // 60
                 mm = (start % 100 + dure) % 60
                 end = hh * 100 + mm
